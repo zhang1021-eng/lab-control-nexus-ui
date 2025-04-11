@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,26 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Lab equipment specific colors
+				instrument: {
+					dark: '#1a1a2e',
+					panel: '#2a2a40',
+					display: '#0f0f1a',
+					grid: '#2a2a2a',
+					trace: '#f7df1e',
+					oscilloscope: '#f7df1e',
+					power: '#ff5252',
+					active: '#4caf50',
+					inactive: '#616161',
+					warning: '#ff9800'
+				},
+				sensor: {
+					temperature: '#ff5252',
+					humidity: '#2196f3',
+					light: '#ffc107',
+					distance: '#9c27b0',
+					gesture: '#4caf50'
 				}
 			},
 			borderRadius: {
@@ -84,11 +105,25 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'pulse-slow': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.7' }
+				},
+				'oscilloscope-sweep': {
+					'0%': { transform: 'translateX(-100%)' },
+					'100%': { transform: 'translateX(100%)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'pulse-slow': 'pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+				'oscilloscope-sweep': 'oscilloscope-sweep 3s linear infinite'
+			},
+			fontFamily: {
+				mono: ['JetBrains Mono', 'Menlo', 'monospace'],
+				instrument: ['JetBrains Mono', 'Menlo', 'monospace'],
 			}
 		}
 	},
