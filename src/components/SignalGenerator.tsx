@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import DashboardCard from "./DashboardCard";
 import { Slider } from "@/components/ui/slider";
@@ -5,7 +6,7 @@ import { Switch } from "@/components/ui/switch";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Activity, Waves, Triangle } from "lucide-react";
+import { Activity, WaveformIcon, Triangle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type WaveformType = 'sine' | 'square' | 'triangle';
@@ -79,7 +80,7 @@ const SignalGenerator = () => {
                   <span className="ml-2">正弦波</span>
                 </ToggleGroupItem>
                 <ToggleGroupItem value="square" className="flex-1">
-                  <Waves size={20} className={waveform === 'square' ? "text-instrument-trace" : undefined} />
+                  <WaveformIcon size={20} className={waveform === 'square' ? "text-instrument-trace" : undefined} />
                   <span className="ml-2">方波</span>
                 </ToggleGroupItem>
                 <ToggleGroupItem value="triangle" className="flex-1">
