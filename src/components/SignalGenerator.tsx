@@ -6,7 +6,7 @@ import { Switch } from "@/components/ui/switch";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { SineWave, SquareWave, Triangle } from "lucide-react";
+import { WaveSine, Waves, Triangle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type WaveformType = 'sine' | 'square' | 'triangle';
@@ -83,11 +83,11 @@ const SignalGenerator = () => {
               <label className="text-sm font-medium">波形选择</label>
               <ToggleGroup type="single" value={waveform} onValueChange={(value) => value && setWaveform(value as WaveformType)} className="mt-2">
                 <ToggleGroupItem value="sine" className="flex-1">
-                  <SineWave size={20} className={waveform === 'sine' ? "text-instrument-trace" : undefined} />
+                  <WaveSine size={20} className={waveform === 'sine' ? "text-instrument-trace" : undefined} />
                   <span className="ml-2">正弦波</span>
                 </ToggleGroupItem>
                 <ToggleGroupItem value="square" className="flex-1">
-                  <SquareWave size={20} className={waveform === 'square' ? "text-instrument-trace" : undefined} />
+                  <Waves size={20} className={waveform === 'square' ? "text-instrument-trace" : undefined} />
                   <span className="ml-2">方波</span>
                 </ToggleGroupItem>
                 <ToggleGroupItem value="triangle" className="flex-1">
