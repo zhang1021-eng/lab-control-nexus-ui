@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import DashboardCard from "./DashboardCard";
 import { Slider } from "@/components/ui/slider";
@@ -6,7 +5,7 @@ import { Switch } from "@/components/ui/switch";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Waveform, Wave, Triangle } from "lucide-react";
+import { Activity, Waves, Triangle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type WaveformType = 'sine' | 'square' | 'triangle';
@@ -18,7 +17,6 @@ const SignalGenerator = () => {
   const [dcOffset, setDcOffset] = useState(0);
   const [outputEnabled, setOutputEnabled] = useState(false);
   
-  // Handle frequency input
   const handleFrequencyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);
     if (!isNaN(value) && value >= 0 && value <= 10000000) {
@@ -26,18 +24,16 @@ const SignalGenerator = () => {
     }
   };
   
-  // Draw waveform preview
   const renderWaveformPreview = () => {
     const width = 200;
     const height = 80;
     const points: [number, number][] = [];
     
-    // Generate points for the waveform
     for (let i = 0; i < width; i++) {
       const x = i;
       let y = 0;
       
-      const t = (i / width) * Math.PI * 6; // 3 cycles
+      const t = (i / width) * Math.PI * 6;
       
       switch (waveform) {
         case 'sine':
@@ -57,15 +53,11 @@ const SignalGenerator = () => {
       points.push([x, y]);
     }
     
-    // Create SVG path
     const d = `M ${points[0][0]},${points[0][1]} ${points.slice(1).map(point => `L ${point[0]},${point[1]}`).join(' ')}`;
     
     return (
       <svg width="100%" height="100%" viewBox={`0 0 ${width} ${height}`} className="overflow-visible">
-        {/* Center line */}
         <line x1="0" y1={height / 2} x2={width} y2={height / 2} stroke="#444" strokeWidth="1" strokeDasharray="3,3" />
-        
-        {/* Waveform */}
         <path d={d} fill="none" stroke={outputEnabled ? "#f7df1e" : "#777"} strokeWidth="2" />
       </svg>
     );
@@ -83,11 +75,11 @@ const SignalGenerator = () => {
               <label className="text-sm font-medium">波形选择</label>
               <ToggleGroup type="single" value={waveform} onValueChange={(value) => value && setWaveform(value as WaveformType)} className="mt-2">
                 <ToggleGroupItem value="sine" className="flex-1">
-                  <Waveform size={20} className={waveform === 'sine' ? "text-instrument-trace" : undefined} />
+                  <Activity size={20} className={waveform === 'sine' ? "text-instrument-trace" : undefined} />
                   <span className="ml-2">正弦波</span>
                 </ToggleGroupItem>
                 <ToggleGroupItem value="square" className="flex-1">
-                  <Wave size={20} className={waveform === 'square' ? "text-instrument-trace" : undefined} />
+                  <Waves size={20} className={waveform === 'square' ? "text-instrument-trace" : undefined} />
                   <span className="ml-2">方波</span>
                 </ToggleGroupItem>
                 <ToggleGroupItem value="triangle" className="flex-1">
