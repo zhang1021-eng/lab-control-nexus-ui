@@ -1,7 +1,9 @@
-import { Thermometer, Droplets, Sun, ArrowDownToLine, Hand } from "lucide-react";
+
+import { Thermometer, Droplets, Sun, ArrowDownToLine, Hand, RefreshCw } from "lucide-react";
 import { useTemperatureData, useHumidityData, useLightData, useDistanceData, useGestureData } from "@/hooks/useMockData";
 import DashboardCard from "./DashboardCard";
 import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
 
 interface SensorCardProps {
   title: string;
@@ -9,24 +11,49 @@ interface SensorCardProps {
   value: number | string;
   unit?: string;
   color: string;
+  onRefresh?: () => void;
 }
 
-const SensorCard = ({ title, icon, value, unit, color }: SensorCardProps) => {
+const SensorCard = ({ title, icon, value, unit, color, onRefresh }: SensorCardProps) => {
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const handleRefresh = async () => {
+    if (onRefresh) {
+      setIsRefreshing(true);
+      onRefresh();
+      // Show refresh animation for a short time
+      setTimeout(() => setIsRefreshing(false), 500);
+    }
+  };
+
   return (
-    <div className="bg-secondary p-4 rounded-lg flex items-center">
-      <div 
-        className="h-12 w-12 rounded-full flex items-center justify-center mr-4"
-        style={{ backgroundColor: `color-mix(in srgb, ${color} 20%, transparent)` }}
+    <div className="bg-secondary p-4 rounded-lg flex items-center justify-between">
+      <div className="flex items-center">
+        <div 
+          className="h-12 w-12 rounded-full flex items-center justify-center mr-4"
+          style={{ backgroundColor: `color-mix(in srgb, ${color} 20%, transparent)` }}
+        >
+          <div className="text-foreground">{icon}</div>
+        </div>
+        <div>
+          <p className="text-sm text-muted-foreground">{title}</p>
+          <p className="text-2xl font-mono font-bold">
+            {typeof value === 'number' ? value.toFixed(1) : value}
+            {unit && <span className="text-muted-foreground text-sm ml-1">{unit}</span>}
+          </p>
+        </div>
+      </div>
+      <Button 
+        variant="ghost" 
+        size="icon"
+        onClick={handleRefresh}
+        className="h-8 w-8 hover:bg-background/80"
       >
-        <div className="text-foreground">{icon}</div>
-      </div>
-      <div>
-        <p className="text-sm text-muted-foreground">{title}</p>
-        <p className="text-2xl font-mono font-bold">
-          {typeof value === 'number' ? value.toFixed(1) : value}
-          {unit && <span className="text-muted-foreground text-sm ml-1">{unit}</span>}
-        </p>
-      </div>
+        <RefreshCw 
+          size={16} 
+          className={isRefreshing ? "animate-spin" : ""} 
+        />
+      </Button>
     </div>
   );
 };
@@ -51,6 +78,28 @@ const SensorMonitor = () => {
       return newData;
     });
   }, [temperature]);
+
+  // Refresh functions for each sensor
+  const refreshTemperature = () => {
+    console.log("刷新温度传感器数据");
+    // The mock data hooks will automatically generate new values
+  };
+
+  const refreshHumidity = () => {
+    console.log("刷新湿度传感器数据");
+  };
+
+  const refreshLight = () => {
+    console.log("刷新光照度传感器数据");
+  };
+
+  const refreshDistance = () => {
+    console.log("刷新测距传感器数据");
+  };
+
+  const refreshGesture = () => {
+    console.log("刷新手势识别数据");
+  };
   
   return (
     <div id="sensor-monitor">
@@ -65,7 +114,8 @@ const SensorMonitor = () => {
             icon={<Thermometer className="text-sensor-temperature" />} 
             value={temperature} 
             unit="°C"
-            color="#ff5252" 
+            color="#ff5252"
+            onRefresh={refreshTemperature}
           />
           <SensorCard 
             title="湿度" 
@@ -73,6 +123,7 @@ const SensorMonitor = () => {
             value={humidity} 
             unit="%"
             color="#2196f3"
+            onRefresh={refreshHumidity}
           />
           <SensorCard 
             title="光照度" 
@@ -80,6 +131,7 @@ const SensorMonitor = () => {
             value={Math.round(light)} 
             unit="Lux"
             color="#ffc107"
+            onRefresh={refreshLight}
           />
           <SensorCard 
             title="测距" 
@@ -87,12 +139,14 @@ const SensorMonitor = () => {
             value={Math.round(distance)} 
             unit="cm"
             color="#9c27b0"
+            onRefresh={refreshDistance}
           />
           <SensorCard 
             title="手势识别" 
             icon={<Hand className="text-sensor-gesture" />} 
             value={gesture}
             color="#4caf50"
+            onRefresh={refreshGesture}
           />
         </div>
         
