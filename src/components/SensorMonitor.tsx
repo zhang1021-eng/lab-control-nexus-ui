@@ -1,7 +1,7 @@
-
 import { Thermometer, Droplets, Sun, ArrowDownToLine, Hand, RefreshCw } from "lucide-react";
 import { useTemperatureData, useHumidityData, useLightData, useDistanceData, useGestureData } from "@/hooks/useMockData";
 import DashboardCard from "./DashboardCard";
+import LedControl from "./LedControl";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 
@@ -150,7 +150,7 @@ const SensorMonitor = () => {
           />
         </div>
         
-        {/* Optional temperature history chart */}
+        {/* Temperature history chart */}
         <div className="mt-6">
           <h3 className="text-sm font-medium mb-2">温度历史趋势 (60秒)</h3>
           <div className="h-32 w-full bg-instrument-display rounded-md overflow-hidden">
@@ -168,6 +168,9 @@ const SensorMonitor = () => {
             </div>
           </div>
         </div>
+
+        {/* LED Control */}
+        <LedControl />
       </DashboardCard>
     </div>
   );
