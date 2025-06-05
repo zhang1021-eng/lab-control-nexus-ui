@@ -5,47 +5,6 @@
 
 @layer base {
   :root {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-
-    --radius: 0.5rem;
-    
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .light {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
 
@@ -73,6 +32,56 @@
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
     --ring: 240 5.9% 10%;
+
+    --radius: 0.5rem;
+    
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 10% 3.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 240 5.9% 90%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -89,11 +98,11 @@
 @layer components {
   /* Instrument display styling */
   .instrument-display {
-    @apply bg-instrument-display rounded-md border border-muted p-4 text-foreground font-mono;
+    @apply bg-gray-50 rounded-md border border-gray-200 p-4 text-foreground font-mono;
   }
   
   .instrument-panel {
-    @apply bg-instrument-panel rounded-md border border-muted p-4;
+    @apply bg-white rounded-md border border-gray-200 p-4 shadow-sm;
   }
   
   .digital-readout {
@@ -103,8 +112,8 @@
   .oscilloscope-grid {
     background-size: 20px 20px;
     background-image:
-      linear-gradient(to right, rgba(42, 42, 42, 0.5) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(42, 42, 42, 0.5) 1px, transparent 1px);
+      linear-gradient(to right, rgba(200, 200, 200, 0.3) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(200, 200, 200, 0.3) 1px, transparent 1px);
   }
   
   .status-indicator {
@@ -112,23 +121,23 @@
   }
   
   .status-active {
-    @apply bg-instrument-active animate-pulse;
+    @apply bg-green-500 animate-pulse;
   }
   
   .status-inactive {
-    @apply bg-instrument-inactive;
+    @apply bg-gray-400;
   }
   
   .status-warning {
-    @apply bg-instrument-warning;
+    @apply bg-orange-500;
   }
   
   .control-knob {
-    @apply relative w-16 h-16 rounded-full border border-muted bg-secondary flex items-center justify-center cursor-pointer;
+    @apply relative w-16 h-16 rounded-full border border-gray-300 bg-white flex items-center justify-center cursor-pointer shadow-sm;
   }
   
   .control-knob-indicator {
-    @apply absolute w-1 h-6 bg-primary top-1;
+    @apply absolute w-1 h-6 bg-gray-800 top-1;
   }
   
   .gpio-pin {
@@ -136,15 +145,15 @@
   }
   
   .gpio-pin-active {
-    @apply bg-instrument-active text-white;
+    @apply bg-green-500 text-white;
   }
   
   .gpio-pin-inactive {
-    @apply bg-instrument-inactive text-gray-200;
+    @apply bg-gray-300 text-gray-600;
   }
   
   .gpio-pin-power {
-    @apply bg-instrument-power text-white;
+    @apply bg-red-500 text-white;
   }
   
   .gpio-pin-ground {
